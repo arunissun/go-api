@@ -2,6 +2,26 @@
 from typing import Dict, Generator, Optional
 
 import httpx
+from django.conf import settings
+
+
+def _remap_stac_url(url: str) -> str:
+    """
+    Replace the external STAC base URL prefix with the internal cluster URL.
+
+    Requires both EOAPI_STAC_EXTERNAL_URL and EOAPI_STAC_INTERNAL_URL to be set.
+    """
+    external_base = getattr(settings, "EOAPI_STAC_EXTERNAL_URL", None)
+    internal_base = getattr(settings, "EOAPI_STAC_INTERNAL_URL", None)
+    if not external_base or not internal_base:
+        return url
+    external_base = external_base.rstrip("/")
+    internal_base = internal_base.rstrip("/")
+    if url.startswith(external_base):
+        here = internal_base + url[len(external_base) :]
+        print("the remapped url is ", here)
+        return here
+    return url
 
 
 def build_search_params(
@@ -57,7 +77,7 @@ def build_stac_search(
 
 
 def fetch_stac_data(url: str, payload: dict | None = None, timeout: int | None = 60):
-    response = httpx.get(url=url, params=payload, timeout=timeout)
+    response = httpx.get(url=_remap_stac_url(url), params=payload, timeout=timeout)
     response.raise_for_status()
     return response.json()
 
