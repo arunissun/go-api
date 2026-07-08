@@ -18,9 +18,7 @@ def _remap_stac_url(url: str) -> str:
     external_base = external_base.rstrip("/")
     internal_base = internal_base.rstrip("/")
     if url.startswith(external_base):
-        here = internal_base + url[len(external_base) :]
-        print("the remapped url is ", here)
-        return here
+        return internal_base + url[len(external_base) :]
     return url
 
 
