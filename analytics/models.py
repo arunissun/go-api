@@ -31,8 +31,11 @@ def mask_ip_address(ip: str) -> str | None:
 
 class DocumentDownloadLog(models.Model):
     class DocumentSource(models.TextChoices):
+        # External Source
         AZURE_BLOB = "azure_blob", _("Azure Blob")
+        # Internal Source
         ADORE = "adore", _("Adore")
+        GOAPI = "goapi", _("GOAPI")
         SHAREPOINT = "sharepoint", _("SharePoint")
         OTHER = "other", _("Other")
 
