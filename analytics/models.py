@@ -108,6 +108,8 @@ def detect_source(url: str) -> str:
         return DocumentDownloadLog.DocumentSource.AZURE_BLOB
     if "blob.core.windows.net" in url:
         return DocumentDownloadLog.DocumentSource.AZURE_BLOB
+    if "go-api.ifrc.org" in url:
+        return DocumentDownloadLog.DocumentSource.GOAPI
     if "adore.ifrc.org" in url:
         return DocumentDownloadLog.DocumentSource.ADORE
     if "sharepoint.com" in url:

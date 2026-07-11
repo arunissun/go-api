@@ -1,10 +1,12 @@
 from django.contrib import admin
 
+from dref.admin import ReadOnlyMixin
+
 from .models import DocumentDownloadLog
 
 
 @admin.register(DocumentDownloadLog)
-class DocumentDownloadLogAdmin(admin.ModelAdmin):
+class DocumentDownloadLogAdmin(ReadOnlyMixin, admin.ModelAdmin):
     list_display = ("downloaded_at", "document_type", "source", "object_id", "user", "ip_address")
     list_filter = ("document_type", "source")
     date_hierarchy = "downloaded_at"
@@ -19,9 +21,3 @@ class DocumentDownloadLogAdmin(admin.ModelAdmin):
         "ip_address",
     )
     ordering = ("-downloaded_at",)
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
