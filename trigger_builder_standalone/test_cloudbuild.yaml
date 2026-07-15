@@ -1,0 +1,12 @@
+steps:
+  - name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --quiet \
+          "google-cloud-aiplatform>=1.71.0" \
+          "google-auth>=2.28.0" && \
+        python go-api/trigger_builder_standalone/scripts/integration/probe_genai.py
+
+timeout: '300s'

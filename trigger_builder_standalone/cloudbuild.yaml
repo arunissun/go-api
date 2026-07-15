@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    env:
+      - 'DOCKER_BUILDKIT=1'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/trigger-builder/backend:${_IMAGE_TAG}'
+      - '-f'
+      - 'go-api/trigger_builder_standalone/Dockerfile'
+      - '.'
+
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/trigger-builder/backend:${_IMAGE_TAG}'
+
+timeout: '1200s'

@@ -1,0 +1,20 @@
+[project]
+name = "trigger-builder-standalone"
+version = "0.1.0"
+description = "Minimal standalone Django backend for the EAP Trigger Builder — no DB, no Celery."
+requires-python = ">=3.11"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "djangorestframework==3.15.2",
+    "django-cors-headers==3.11.0",
+    "google-genai==2.7.0",
+    "google-auth==2.53.0",
+    "gunicorn==23.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = false
