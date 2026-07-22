@@ -41,6 +41,6 @@ def validate_statement(s: dict) -> tuple[list[str], list[str]]:
                 f"Statement {sid}: geographyLabel is recommended for geographyType '{geo_type}'."
             )
         if geo_type in label_required_for and not s.get("geographyConfirmed"):
-            errors.append(f"Statement {sid}: geography must be confirmed through Mapbox.")
+            errors.append(f"Statement {sid}: geography must be explicitly confirmed.")
 
     return warnings, errors
