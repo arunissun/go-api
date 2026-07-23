@@ -46,7 +46,7 @@ def _assemble_clause(s: dict) -> str:
     value_part = s.get("thresholdValue") or "[threshold]"
 
     unit = s.get("thresholdUnit") or ""
-    unit_part = "[unit]" if not unit or unit == "custom" else unit
+    unit_part = "[unit]" if unit == "custom" else unit
 
     threshold_clause = " ".join(filter(None, [var_part, subcat_part, op_part, value_part, unit_part]))
 
